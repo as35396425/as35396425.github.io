@@ -99,6 +99,9 @@
                        title="RSS Feed"></a>
                 
                 
+                    <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜尋">
+                    </a>
+                
             </nav>
             <div id="search-form-wrap">
                 <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
@@ -111,6 +114,14 @@
                 <section id="main">
     <div class="archives-outer-wrap">
         <div class="tag-wrap">
+            
+                <div class="archives-tag-list-item">
+                    <a class="archives-tag-list-link" href="/tags/自我介紹/">自我介紹</a>
+                </div>
+            
+                <div class="archives-tag-list-item">
+                    <a class="archives-tag-list-link" href="/tags/生活/">生活</a>
+                </div>
             
         </div>
         <div class="category-wrap">
@@ -139,7 +150,7 @@
     <div class="archive-article-title-wrap">
         
             
-                <a class="archive-article-title" href="/2023/06/04/My-new-Post/">My new Post</a>
+                <a class="archive-article-title" href="/2023/06/04/My-new-Post/">個人介紹</a>
             
         
     </div>
@@ -190,7 +201,7 @@
             </div>
             <div class="sidebar-state-tag">
                 <div>標簽</div>
-                <div class="sidebar-state-number">0</div>
+                <div class="sidebar-state-number">2</div>
             </div>
         </div>
         <div class="sidebar-social">
@@ -245,6 +256,13 @@
 
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">標籤雲</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%B4%B9/" style="font-size: 10px;">自我介紹</a>
+        </div>
+    </div>
+
     
         
     <div class="widget-wrap">
@@ -279,7 +297,7 @@
             
                 <div>
                     <span class="icon-brush"></span>
-                    75
+                    402
                     &nbsp;|&nbsp;
                     <span class="icon-coffee"></span>
                     00:02
@@ -317,7 +335,7 @@
             </div>
             <div class="sidebar-state-tag">
                 <div>標簽</div>
-                <div class="sidebar-state-number">0</div>
+                <div class="sidebar-state-number">2</div>
             </div>
         </div>
         <div class="sidebar-social">
@@ -399,6 +417,34 @@
 
 
 
+
+    
+<script src="https://unpkg.com/algoliasearch@4.14.2/dist/algoliasearch-lite.umd.js"></script>
+
+    
+<script src="https://unpkg.com/instantsearch.js@1.5.1/dist/instantsearch.min.js"></script>
+
+    
+<script src="/js/search.js"></script>
+
+    <script>
+        var CONFIG = {
+            root: '/',
+            algolia: {
+                applicationID: "DUCB0DCX94",
+                apiKey: "b9294d60f1d59dc9bd7b9dd52bda2797",
+                indexName: "githubPage",
+                hits: {
+                    "per_page": parseInt("10")
+                },
+                labels: {
+                    "input_placeholder": "搜索.....",
+                    "hits_empty": "未发现与 「${query}」相关内容",
+                    "hits_stats": "找到${hits}条结果（用时 ${time} ms）"
+                }
+            }
+        };
+    </script>
 
     </div>
     <div class="site-search">

@@ -94,6 +94,9 @@
                        title="RSS Feed"></a>
                 
                 
+                    <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜尋">
+                    </a>
+                
             </nav>
             <div id="search-form-wrap">
                 <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
@@ -134,6 +137,34 @@
 
 
 
+
+    
+<script src="https://unpkg.com/algoliasearch@4.14.2/dist/algoliasearch-lite.umd.js"></script>
+
+    
+<script src="https://unpkg.com/instantsearch.js@1.5.1/dist/instantsearch.min.js"></script>
+
+    
+<script src="/js/search.js"></script>
+
+    <script>
+        var CONFIG = {
+            root: '/',
+            algolia: {
+                applicationID: "DUCB0DCX94",
+                apiKey: "b9294d60f1d59dc9bd7b9dd52bda2797",
+                indexName: "githubPage",
+                hits: {
+                    "per_page": parseInt("10")
+                },
+                labels: {
+                    "input_placeholder": "搜索.....",
+                    "hits_empty": "未发现与 「${query}」相关内容",
+                    "hits_stats": "找到${hits}条结果（用时 ${time} ms）"
+                }
+            }
+        };
+    </script>
 
 </div>
 <!-- hexo injector body_end start -->
