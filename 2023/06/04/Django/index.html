@@ -1,0 +1,497 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW"
+            
+    >
+    <head>
+    <meta charset="utf-8">
+    
+    
+    <title>
+        
+        </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="title: Django購物網頁cover: https:&#x2F;&#x2F;cdn.discordapp.com&#x2F;attachments&#x2F;887938907843469322&#x2F;1114853220905390150&#x2F;88019829_p0.pngtags: [“python” , “網頁”] View視圖用戶相關之功能 程式碼點開 ‘url(login&#x2F;‘)-&gt;login功能 →templa">
+<meta property="og:type" content="article">
+<meta property="og:title">
+<meta property="og:url" content="http://example.com/2023/06/04/Django/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="title: Django購物網頁cover: https:&#x2F;&#x2F;cdn.discordapp.com&#x2F;attachments&#x2F;887938907843469322&#x2F;1114853220905390150&#x2F;88019829_p0.pngtags: [“python” , “網頁”] View視圖用戶相關之功能 程式碼點開 ‘url(login&#x2F;‘)-&gt;login功能 →templa">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://example.com/View%E8%A6%96%E5%9C%96%201349afd538884e55a80c521d89cac6ca/Untitled.png">
+<meta property="article:published_time" content="2023-06-04T12:27:15.143Z">
+<meta property="article:modified_time" content="2023-06-04T12:28:21.668Z">
+<meta property="article:author" content="Yang-Yu Yao">
+<meta property="article:tag" content="HI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/View%E8%A6%96%E5%9C%96%201349afd538884e55a80c521d89cac6ca/Untitled.png">
+    
+        <link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+    
+    
+        <link rel="shortcut icon" href="/images/smile_hina.ico">
+    
+    
+        
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui/dist/fancybox.css">
+
+    
+    
+    
+<script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+  
+    <body>
+    <div id="container">
+        <div id="wrap">
+            <header id="header">
+    
+        <img data-src="/images/banner.jpg" data-sizes="auto" alt="" class="lazyload">
+    
+    <div id="header-outer" class="outer">
+        <div id="header-title" class="inner">
+            <h1 id="logo-wrap">
+                
+                    
+                    
+                
+            </h1>
+            
+                
+                
+                    <h2 id="subtitle-wrap">
+                        <a href="/" id="subtitle">一般路過東方廚、音遊眾</a>
+                    </h2>
+                
+            
+        </div>
+        <div id="header-inner">
+            <nav id="main-nav">
+                <a id="main-nav-toggle" class="nav-icon"></a>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/">首頁</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/archives">歸檔</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/about">關於</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/friend">友鏈</a>
+                    </span>
+                
+            </nav>
+            <nav id="sub-nav">
+                
+                    <a id="nav-rss-link" class="nav-icon" href="/atom.xml"
+                       title="RSS Feed"></a>
+                
+                
+                    <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜尋">
+                    </a>
+                
+            </nav>
+            <div id="search-form-wrap">
+                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+            </div>
+        </div>
+    </div>
+</header>
+  
+            <div id="content" class="outer">
+                <section id="main"><article id="post-Django" class="h-entry article article-type-post"
+         itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div class="article-inner">
+        <div class="article-meta">
+            <div class="article-date">
+    <a href="/2023/06/04/Django/" class="article-date-link">
+        <time datetime="2023-06-04T12:27:15.143Z"
+              itemprop="datePublished">2023-06-04</time>
+    </a>
+</div>
+
+            
+        </div>
+        <div class="hr-line"></div>
+        
+        <div class="e-content article-entry" itemprop="articleBody">
+            
+                <hr>
+<p>title: Django購物網頁<br>cover: <a target="_blank" rel="noopener" href="https://cdn.discordapp.com/attachments/887938907843469322/1114853220905390150/88019829_p0.png">https://cdn.discordapp.com/attachments/887938907843469322/1114853220905390150/88019829_p0.png</a><br>tags: [“python” , “網頁”]</p>
+<h1 id="View視圖"><a href="#View視圖" class="headerlink" title="View視圖"></a>View視圖</h1><h2 id="用戶相關之功能"><a href="#用戶相關之功能" class="headerlink" title="用戶相關之功能"></a>用戶相關之功能</h2><ul>
+<li><p>程式碼點開</p>
+<h2 id="‘url-login-x2F-‘-gt-login功能-→template-login-html"><a href="#‘url-login-x2F-‘-gt-login功能-→template-login-html" class="headerlink" title="‘url(login&#x2F;‘)-&gt;login功能 →template(login.html)"></a>‘url(login&#x2F;‘)-&gt;login功能 →template(login.html)</h2>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>(<span class="params">request</span>):</span><br><span class="line">        postform = PostForm(request.POST)</span><br><span class="line">        <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> postform.is_valid():  <span class="comment">#forms驗證通過</span></span><br><span class="line">                name = request.POST[<span class="string">&#x27;username&#x27;</span>]</span><br><span class="line">                password = request.POST[<span class="string">&#x27;password&#x27;</span>]</span><br><span class="line">                user = authenticate(username=name, password=password)</span><br><span class="line">                <span class="keyword">if</span> user <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    <span class="keyword">if</span> user.is_active:</span><br><span class="line">                        auth.login(request,user)</span><br><span class="line">                        message = <span class="string">&#x27;登入成功！&#x27;</span></span><br><span class="line">                        </span><br><span class="line">                        <span class="keyword">return</span> redirect(<span class="string">&#x27;/login1/&#x27;</span>)</span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        message = <span class="string">&#x27;帳號尚未啟用！&#x27;</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    message = <span class="string">&#x27;登入失敗！&#x27;</span></span><br><span class="line">                    </span><br><span class="line">            <span class="keyword">else</span>:message = <span class="string">&quot;請輸入驗證碼&quot;</span></span><br><span class="line">        <span class="keyword">if</span> request.user.is_authenticated:</span><br><span class="line">            message = <span class="string">&quot;已經登入&quot;</span></span><br><span class="line">            <span class="keyword">return</span> redirect(<span class="string">&#x27;/login1/&#x27;</span>) </span><br><span class="line">            <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">            </span><br><span class="line">                <span class="keyword">return</span> redirect(<span class="string">&#x27;/login1/&#x27;</span>) </span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> render(request, <span class="string">&quot;login.html&quot;</span>, <span class="built_in">locals</span>())</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path(<span class="string">&#x27;login/&#x27;</span>, views.login),</span><br></pre></td></tr></table></figure>
+<h2 id="功能logout"><a href="#功能logout" class="headerlink" title="功能logout"></a>功能logout</h2>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">logout</span>(<span class="params">request</span>):</span><br><span class="line">	auth.logout(request)</span><br><span class="line">	<span class="keyword">return</span> redirect(<span class="string">&#x27;/login/&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="功能-增加新用戶"><a href="#功能-增加新用戶" class="headerlink" title="功能 增加新用戶"></a>功能 增加新用戶</h2>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">addtest</span>(<span class="params">request</span>):</span><br><span class="line">	<span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">		name = request.POST[<span class="string">&#x27;username&#x27;</span>]</span><br><span class="line">		password = request.POST[<span class="string">&#x27;password&#x27;</span>]</span><br><span class="line">		email = request.POST[<span class="string">&quot;email&quot;</span>]</span><br><span class="line">		first_name = request.POST[<span class="string">&quot;first_name&quot;</span>]</span><br><span class="line">		last_name = request.POST[<span class="string">&quot;last_name&quot;</span>]	</span><br><span class="line">		<span class="keyword">try</span>:</span><br><span class="line">			user=User.objects.get(username=name)</span><br><span class="line">		<span class="keyword">except</span> :</span><br><span class="line">			user = <span class="literal">None</span></span><br><span class="line">		<span class="keyword">if</span> user!=<span class="literal">None</span>:</span><br><span class="line">			message = name + <span class="string">&quot;帳號已存在&quot;</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			user=User.objects.create_user(name,email,password)</span><br><span class="line">			user.first_name = first_name</span><br><span class="line">			user.last_name = last_name</span><br><span class="line">			user.is_staff=<span class="literal">False</span>	<span class="comment"># 工作人員狀態</span></span><br><span class="line">			user.save()</span><br><span class="line">			<span class="keyword">return</span> redirect(<span class="string">&#x27;/login/&#x27;</span>)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		message = <span class="string">&quot;請輸入註冊資訊&quot;</span></span><br><span class="line">	<span class="keyword">return</span> render(request,<span class="string">&#x27;adduser.html&#x27;</span>,<span class="built_in">locals</span>())</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="URL-x2F-login1-x2F-→商品首頁→’producer-html’-包含-查詢-分類-分頁器"><a href="#URL-x2F-login1-x2F-→商品首頁→’producer-html’-包含-查詢-分類-分頁器" class="headerlink" title="URL(&#x2F;login1&#x2F;)→商品首頁→’producer.html’ (包含 查詢 分類  分頁器"></a>URL(&#x2F;login1&#x2F;)→商品首頁→’producer.html’ (包含 查詢 分類  分頁器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> request.method == <span class="string">&quot;POST&quot;</span> <span class="keyword">and</span> post_form.is_valid(): </span><br><span class="line">        <span class="comment">#post_form = forms.productSearch(data = request.POST)</span></span><br><span class="line">            <span class="comment">#模板那邊使用&#123;&#123;post_form.XXX&#125;&#125;來取得表單資料</span></span><br><span class="line">        name = post_form.cleaned_data[<span class="string">&#x27;cName&#x27;</span>]</span><br><span class="line">        <span class="built_in">print</span>(name )</span><br><span class="line">        student = product.objects.<span class="built_in">filter</span>( productName__contains = name) <span class="comment">#Search Name</span></span><br><span class="line">            <span class="comment">#col&#x27;s name  + __contains   : 任一關鍵字符合</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#return render(request,&#x27;producer.html&#x27;,locals())</span></span><br><span class="line">    <span class="keyword">if</span> productType != <span class="literal">None</span>:</span><br><span class="line">        student = product.objects.<span class="built_in">filter</span>(productType = productType)<span class="comment">#Search Type</span></span><br></pre></td></tr></table></figure>
+
+<p>根據form POST之內容，對model類進行資料庫鍵值查詢</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">paginator = Paginator(student,<span class="number">4</span>)</span><br><span class="line">    pageNumber = request.GET.get(<span class="string">&#x27;page&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        page_obj = paginator.page(pageNumber)</span><br><span class="line">    <span class="keyword">except</span> PageNotAnInteger:</span><br><span class="line">        page_obj = paginator.page(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">except</span> EmptyPage: <span class="comment">#</span></span><br><span class="line">        page_obj = paginator.page(paginator.num_pages)</span><br></pre></td></tr></table></figure>
+
+<p>可自訂一頁顯示多少資料   Paginator(student,4) 對於model students 可以顯示四筆data在分頁</p>
+<h2 id="購物車內容實現方式-COOKIES-做-新增檢視刪除"><a href="#購物車內容實現方式-COOKIES-做-新增檢視刪除" class="headerlink" title="購物車內容實現方式 (COOKIES) ^ 做(新增檢視刪除)"></a>購物車內容實現方式 (COOKIES) ^ 做(新增檢視刪除)</h2><ul>
+<li><p>點開</p>
+<h3 id="設定COOKIES-x3D-x3D-新增購物車商品數量"><a href="#設定COOKIES-x3D-x3D-新增購物車商品數量" class="headerlink" title="設定COOKIES &#x3D;&#x3D; 新增購物車商品數量"></a>設定COOKIES &#x3D;&#x3D; 新增購物車商品數量</h3>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">productID = pk</span><br><span class="line">    <span class="keyword">if</span>(productID):</span><br><span class="line"></span><br><span class="line">        prev_url = request.META[<span class="string">&#x27;HTTP_REFERER&#x27;</span>]</span><br><span class="line">        </span><br><span class="line">        response = redirect(prev_url )</span><br><span class="line">        goods_count = request.COOKIES.get(productID)</span><br><span class="line">        <span class="keyword">if</span>(goods_count):</span><br><span class="line">            goods_count = <span class="built_in">int</span>(goods_count)+<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span> :</span><br><span class="line">            goods_count = <span class="number">1</span></span><br><span class="line">        response.set_cookie(productID,goods_count)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+<p>  取得primaryKey → 設定COOKIE(key,val) &#x3D;((productID,goods_count)) &#x3D; (商品主鍵ID,商品數量)</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path(<span class="string">&quot;cart/add/&lt;pk&gt;&quot;</span>,views.addCart ,name =<span class="string">&quot;addcart&quot;</span> ), </span><br></pre></td></tr></table></figure>
+<p>  primaryKey從url.py當中去接收，</p>
+<p>  <img src="/View%E8%A6%96%E5%9C%96%201349afd538884e55a80c521d89cac6ca/Untitled.png" alt="Untitled"></p>
+<p>  通過在templates 中取得顯示商品之主鍵值 ，可獲取從其他funtion傳入templates之鍵值</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;%url <span class="string">&#x27;addcart s.pk&#x27;</span>&#125;  -&gt;取得url.py中name == <span class="string">&#x27;addcart&#x27;</span>的網址 s.pk為product表中PK</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+<h3 id="檢視購物車頁面"><a href="#檢視購物車頁面" class="headerlink" title="檢視購物車頁面"></a>檢視購物車頁面</h3>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">showCart</span>(<span class="params">request</span>):</span><br><span class="line"></span><br><span class="line">    cart_goods_list = []</span><br><span class="line">    </span><br><span class="line">    cart_goods_count = <span class="number">0</span></span><br><span class="line">    cart_goods_money = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;顯示購物車頁面&#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> productionID , productionNum <span class="keyword">in</span> request.COOKIES.items():</span><br><span class="line">        <span class="comment">#判斷ID是否為數字 -&gt;確定是否為商品的COOKIES</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span>  productionID.isdigit():</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        cart_goods = product.objects.get(productID = productionID)</span><br><span class="line">        cart_goods.Num = productionNum <span class="comment">#數量(單)</span></span><br><span class="line"></span><br><span class="line">        aGoodTotalPrice =  <span class="built_in">int</span>(productionNum)* <span class="built_in">int</span>(cart_goods.productPrice)</span><br><span class="line">        cart_goods.total = aGoodTotalPrice <span class="comment">#總金額(單)</span></span><br><span class="line">        cart_goods_list.append(cart_goods)<span class="comment">#把cookie相等的商品加入列表</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#總數量和金額 (全)</span></span><br><span class="line">        cart_goods_count += <span class="built_in">int</span>(productionNum)</span><br><span class="line">        cart_goods_money += aGoodTotalPrice</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> render(request , <span class="string">&#x27;cartPage.html&#x27;</span> , <span class="built_in">locals</span>())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  主要是取得COOKIES的值，此值可作為get model的condition</p>
+<h3 id="移除購物車商品"><a href="#移除購物車商品" class="headerlink" title="移除購物車商品"></a>移除購物車商品</h3>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">removeCart</span>(<span class="params">request , pk = <span class="literal">None</span></span>):</span><br><span class="line">    </span><br><span class="line">    productID = pk</span><br><span class="line">    <span class="keyword">if</span> (productID ) :</span><br><span class="line">        prev_url = request.META[<span class="string">&#x27;HTTP_REFERER&#x27;</span>]</span><br><span class="line">        response = redirect(prev_url)</span><br><span class="line">        <span class="comment">#取得上一頁url</span></span><br><span class="line">        productCount = request.COOKIES.get(productID,<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="comment">#藉由是否獲取到cookies值，判別商品存在購物車</span></span><br><span class="line">        <span class="keyword">if</span> productCount:</span><br><span class="line">            response.delete_cookie(productID)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prev_url = request.META[<span class="string">&#x27;HTTP_REFERER&#x27;</span>] <span class="comment"># 可以取的上頁網址</span></span><br></pre></td></tr></table></figure>
+<p>  原理是直接對COOKIES做remove的動作，進而改變SHOW之值</p>
+</li>
+</ul>
+<h2 id="訂單功能實現"><a href="#訂單功能實現" class="headerlink" title="訂單功能實現"></a>訂單功能實現</h2><h3 id="提交訂單"><a href="#提交訂單" class="headerlink" title="提交訂單"></a>提交訂單</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">place_order</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;提交訂單&#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment">#需要購物車所有商品 數量 總價 運費 ...</span></span><br><span class="line">    cart_goods_list = []</span><br><span class="line">    cart_goods_count = <span class="number">0</span></span><br><span class="line">    cart_goods_money = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> productID,productCount <span class="keyword">in</span> request.COOKIES.items():</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> productID.isdigit():</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        cart_goods = product.objects.get(productID = productID) <span class="comment">#取商品資訊</span></span><br><span class="line">        cart_goods.productNum = productCount  <span class="comment">#單商品數量</span></span><br><span class="line"></span><br><span class="line">        cart_goods.aGoodTotalPrice =  <span class="built_in">int</span>(productCount )* <span class="built_in">int</span>(cart_goods.productPrice)</span><br><span class="line">        <span class="comment">#單商品價格總計 (看同種多件)</span></span><br><span class="line">        cart_goods_list.append(cart_goods)</span><br><span class="line"></span><br><span class="line">        cart_goods_count += <span class="built_in">int</span>(productCount) <span class="comment">#總商品數量</span></span><br><span class="line"></span><br><span class="line">        cart_goods_money += cart_goods.aGoodTotalPrice <span class="comment">#總商品金額</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> render(request,<span class="string">&#x27;placeOrder.html&#x27;</span>,<span class="built_in">locals</span>())</span><br><span class="line"><span class="keyword">import</span> time</span><br></pre></td></tr></table></figure>
+
+<p>遍歷COOKIES的值 ，得到的對象存入列表方便templates取用</p>
+<h3 id="根據提交之表單傳送資訊"><a href="#根據提交之表單傳送資訊" class="headerlink" title="根據提交之表單傳送資訊"></a>根據提交之表單傳送資訊</h3><p>主要執行將Cookies存入資料表當中之工作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">submit_order</span>(<span class="params">request</span>):</span><br><span class="line">    oreder_info = models.OrderInfo()</span><br><span class="line"></span><br><span class="line">    addr = request.POST[<span class="string">&#x27;addr&#x27;</span>]</span><br><span class="line">    buyer = request.POST[<span class="string">&#x27;buy&#x27;</span>]</span><br><span class="line">    phoneNum = request.POST[<span class="string">&#x27;phone&#x27;</span>]</span><br><span class="line">    <span class="comment">#extra = request.POST[&#x27;extra&#x27;]</span></span><br><span class="line"></span><br><span class="line">    oreder_info.orderAddr = addr</span><br><span class="line">    oreder_info.orderBuy = buyer</span><br><span class="line">    oreder_info.orderPhone = phoneNum</span><br><span class="line">    <span class="comment">#oreder_info.orderExtra = extra</span></span><br><span class="line">    <span class="comment">#order_info.orderUser = User.objects.get(username=Uid) //F.K賦予實例</span></span><br><span class="line">    oreder_info.orderID =<span class="built_in">str</span>( time.time()*<span class="number">1000</span>) + <span class="built_in">str</span>(<span class="built_in">int</span>(time.process_time())  * <span class="number">1000000</span>)</span><br><span class="line"><span class="comment">#訂單編號產生器 </span></span><br><span class="line"></span><br><span class="line">    oreder_info.save()</span><br><span class="line">    response = redirect(<span class="string">&quot;/cart/submit_success/%s&quot;</span> %oreder_info.orderID)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> productID , productNum <span class="keyword">in</span> request.COOKIES.items():</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> productID.isdigit():</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        product = models.product.objects.get(productID = productID)</span><br><span class="line">        order_product = models.OrderProduct()</span><br><span class="line">        order_product.productInfo = product <span class="comment">#foreignKey被給予實例對象</span></span><br><span class="line">        order_product.product_num = productNum <span class="comment">#cookie取的 單商品總數量</span></span><br><span class="line">        order_product.productOrder = oreder_info<span class="comment">#foreignKey被給予實例對象</span></span><br><span class="line">        usermodel = User.objects.get(username=request.user.username)</span><br><span class="line">        order_product.productUserOrder = usermodel</span><br><span class="line">        order_product.save()</span><br><span class="line">        response.delete_cookie(productID)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> response</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>成功之後會跳進此頁面，根據訂單編號，檢視不同訂單之資訊</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">submit_success</span>(<span class="params">request,pk = <span class="literal">None</span></span>):</span><br><span class="line">    order_id = pk</span><br><span class="line"></span><br><span class="line">    order_info = models.OrderInfo.objects.get(orderID = order_id)</span><br><span class="line">    order_product_list = models.OrderProduct.objects.<span class="built_in">filter</span>(productOrder = order_info)</span><br><span class="line">    </span><br><span class="line">    orderUser = User.objects.get(username = request.user.username)</span><br><span class="line">    test = models.OrderProduct.objects.<span class="built_in">filter</span>(productUserOrder  = orderUser)</span><br><span class="line"></span><br><span class="line">    total_money = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    total_num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> product <span class="keyword">in</span> order_product_list:</span><br><span class="line">        product.total_money = <span class="built_in">int</span>(product.productInfo.productPrice )* <span class="built_in">int</span>(product.product_num)</span><br><span class="line">        total_money+=product.total_money</span><br><span class="line">        total_num+=product.product_num</span><br><span class="line">    <span class="keyword">return</span> render(request , <span class="string">&#x27;success.html&#x27;</span> , <span class="built_in">locals</span>())</span><br></pre></td></tr></table></figure>
+
+<h3 id="根據登入使用者帳號，返回使用者的訂單"><a href="#根據登入使用者帳號，返回使用者的訂單" class="headerlink" title="根據登入使用者帳號，返回使用者的訂單"></a>根據登入使用者帳號，返回使用者的訂單</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">f searchUserOrder(request):</span><br><span class="line"></span><br><span class="line">    orderUser = User.objects.get(username = request.user.username)</span><br><span class="line">    order_product_list = models.OrderProduct.objects.<span class="built_in">filter</span>(productUserOrder  = orderUser)</span><br><span class="line">    orderIdList = []</span><br><span class="line"><span class="comment">#productOrder代表訂單的編號 -&gt;但是用ID來表示(非上面產生流水號)</span></span><br><span class="line">    x=order_product_list .values(<span class="string">&#x27;productOrder&#x27;</span>).distinct()</span><br><span class="line">    <span class="built_in">print</span>(x)</span><br><span class="line">    <span class="keyword">for</span> forderID <span class="keyword">in</span> x:</span><br><span class="line">        <span class="comment">#print(orderID[&#x27;productOrder&#x27;])   # forderID[&#x27;productOrder&#x27;] 字典型式 取Value</span></span><br><span class="line">        productOrderID=models.OrderInfo.objects.<span class="built_in">filter</span>(<span class="built_in">id</span> = forderID[<span class="string">&#x27;productOrder&#x27;</span>])</span><br><span class="line">        orderIdList.append(*productOrderID) <span class="comment">#查詢得到符合條件OrderInfo實例</span></span><br><span class="line">				<span class="comment">#但會回傳列表型式 所以加上*作解包</span></span><br><span class="line">    <span class="built_in">print</span>(orderIdList)</span><br><span class="line"></span><br><span class="line">    total_money = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    total_num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> product <span class="keyword">in</span> order_product_list:</span><br><span class="line">        product.productOrder.orderID</span><br><span class="line">        product.total_money = <span class="built_in">int</span>(product.productInfo.productPrice )* <span class="built_in">int</span>(product.product_num)</span><br><span class="line">        total_money+=product.total_money</span><br><span class="line">        total_num+=product.product_num</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> render(request , <span class="string">&#x27;UserOrder.html&#x27;</span> , <span class="built_in">locals</span>())</span><br></pre></td></tr></table></figure>
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="http://example.com/2023/06/04/Django/" data-id="cliheg0fv0000ost20fxu031w" data-title=""
+               class="article-share-link">Share</a>
+            
+            
+        </footer>
+    </div>
+    
+        
+    <nav id="article-nav">
+        
+        
+            <div class="article-nav-link-wrap article-nav-link-right">
+                
+                    <img data-src="https://cdn.discordapp.com/attachments/887938907843469322/1114853220905390150/88019829_p0.png" data-sizes="auto" alt="個人介紹"
+                         class="lazyload">
+                
+                <a href="/2023/06/04/Introduction/"></a>
+                <div class="article-nav-caption">Older</div>
+                <div class="article-nav-title">
+                    
+                        個人介紹
+                    
+                </div>
+            </div>
+        
+    </nav>
+
+    
+</article>
+
+</section>
+                
+                    <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="Yang-Yu Yao" class="lazyload">
+            <div class="sidebar-author-name">Yang-Yu Yao</div>
+            <div class="sidebar-description">你好</div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">3</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分類</div>
+                <div class="sidebar-state-number">0</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>標簽</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/as35396425 itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-google>
+                    <a href=https://plus.google.com/yourname itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-twitter>
+                    <a href=https://twitter.com/Yuyuyao7/ itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-facebook>
+                    <a href=https://www.facebook.com/smailyue/ itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">首頁</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">歸檔</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">關於</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">友鏈</div>
+                </div>
+            
+        </div>
+    </div>
+    
+        
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">標籤雲</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%B4%B9/" style="font-size: 10px;">自我介紹</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">彙整</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li></ul>
+        </div>
+    </div>
+
+
+    
+</aside>
+                
+            </div>
+            <footer id="footer">
+    <div class="footer-line"></div>
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+            <div>
+                <span class="icon-copyright"></span>
+                2023-2023
+                <span class="footer-info-sep"></span>
+                Yang-Yu Yao
+            </div>
+            
+                <div>
+                    基於&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+                    Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+                </div>
+            
+            
+                <div>
+                    <span class="icon-brush"></span>
+                    1.9k
+                    &nbsp;|&nbsp;
+                    <span class="icon-coffee"></span>
+                    00:09
+                </div>
+            
+            
+                <div>
+                    <span class="icon-eye"></span>
+                    <span id="busuanzi_container_site_pv">縂訪問量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+                    &nbsp;|&nbsp;
+                    <span class="icon-user"></span>
+                    <span id="busuanzi_container_site_uv">縂訪客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+                </div>
+            
+        </div>
+    </div>
+</footer>
+  
+        </div>
+        <nav id="mobile-nav">
+    <div class="sidebar-wrap">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="Yang-Yu Yao" class="lazyload">
+            <div class="sidebar-author-name">Yang-Yu Yao</div>
+            <div class="sidebar-description">你好</div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">3</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分類</div>
+                <div class="sidebar-state-number">0</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>標簽</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/as35396425 itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-google>
+                    <a href=https://plus.google.com/yourname itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-twitter>
+                    <a href=https://twitter.com/Yuyuyao7/ itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-facebook>
+                    <a href=https://www.facebook.com/smailyue/ itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">首頁</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">歸檔</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">關於</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">友鏈</div>
+                </div>
+            
+        </div>
+    </div>
+</nav>
+        
+<script src="https://unpkg.com/jquery@3.6.3/dist/jquery.min.js"></script>
+
+
+<script src="https://unpkg.com/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://unpkg.com/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+
+
+
+
+    
+<script src="https://unpkg.com/algoliasearch@4.14.2/dist/algoliasearch-lite.umd.js"></script>
+
+    
+<script src="https://unpkg.com/instantsearch.js@1.5.1/dist/instantsearch.min.js"></script>
+
+    
+<script src="/js/search.js"></script>
+
+    <script>
+        var CONFIG = {
+            root: '/',
+            algolia: {
+                applicationID: "DUCB0DCX94",
+                apiKey: "b9294d60f1d59dc9bd7b9dd52bda2797",
+                indexName: "githubPage",
+                hits: {
+                    "per_page": parseInt("10")
+                },
+                labels: {
+                    "input_placeholder": "搜索.....",
+                    "hits_empty": "未发现与 「${query}」相关内容",
+                    "hits_stats": "找到${hits}条结果（用时 ${time} ms）"
+                }
+            }
+        };
+    </script>
+
+    </div>
+    <div class="site-search">
+        <div class="algolia-popup popup">
+            <div class="algolia-search">
+                <span class="algolia-search-input-icon"></span>
+                <div class="algolia-search-input" id="algolia-search-input"></div>
+            </div>
+
+            <div class="algolia-results">
+                <div id="algolia-stats"></div>
+                <div id="algolia-hits"></div>
+                <div id="algolia-pagination" class="algolia-pagination"></div>
+            </div>
+
+            <span class="popup-btn-close"></span>
+        </div>
+    </div>
+    <!-- hexo injector body_end start -->
+<script src="/js/insertHighlight.js"></script>
+<!-- hexo injector body_end end --></body>
+    </html>
+
