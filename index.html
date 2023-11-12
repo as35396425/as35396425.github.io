@@ -133,7 +133,7 @@
             <div class="post-meta">
                 <a><span class="icon-calendar"></span>2023-06-04</a>
                 
-                    <a><span class="icon-pencil"></span>327 字</a>
+                    <a><span class="icon-pencil"></span>14 字</a>
                 
                 
                     <a><span class="icon-clock"></span>1 分鐘</a>
@@ -142,7 +142,10 @@
             <div class="post-title">個人介紹</div>
             <article class="post-article">
                 
-                    以下自介名字本人，20歲，偶爾會打音遊的東方廚，最愛轉轉活動範圍:新竹、高雄、台中宅宅的也油油的，但出門會好好穿搭（才不會感到焦慮是個資工學生，對coding的興趣普通，偏喜歡數學和電腦理論會的東西廣，但什麼都不強，簡單來說是個廢人極不擅長聊天，通常有互動我就很開心最大的優點應該是沒什麽脾氣（算是吧音遊主要玩jubeat ，其他還有太鼓、SDVX、OSU…等，都打的很爛基本上只要是附近有的機台我都會去打打看，或是不用排隊的也會電腦遊戲大多都有玩過，但最近都沒甚麼動力接觸新遊戲興趣就是看看廢片和廢文，好像老了就只想耍廢不太喜歡嘲諷，不算雷點，只是我會不知道該做甚麼反應我可能會雷到別人的點：常講星
+                    以下自介Github主頁
+
+音遊紀錄:OSU主頁
+
                 
             </article>
         </div>
@@ -152,7 +155,89 @@
         
     <div class="post-wrap-right">
         
-            <a class="post-link" href="/2023/06/04/Django/"></a>
+            <a class="post-link" href="/2023/11/12/C-call-by-reference/"></a>
+        
+        <div class="post-cover-right">
+            
+                
+                
+                    <img data-src="/images/banner.jpg" data-sizes="auto" alt="C++ call by reference" class="lazyload">
+                
+            
+        </div>
+        <div class="post-info">
+            <div class="post-meta">
+                <a><span class="icon-calendar"></span>2023-11-12</a>
+                
+                    <a><span class="icon-pencil"></span>444 字</a>
+                
+                
+                    <a><span class="icon-clock"></span>1 分鐘</a>
+                
+            </div>
+            <div class="post-title">C++ call by reference</div>
+            <article class="post-article">
+                
+                    在決定函數的Parameter時，我以前對python的概念就是需要用一個變數接收函數的return，如下 12345def sum1(a,b):	XXX = a+b	return XXXa= fun()用C&amp;#x2F;C++的方式大略就是
+123456789101112int sum1(int a , int b)&amp;#123;	 	return a+b ; &amp;#125;int main()&amp;#123;	int a = 3 ; 	int b = 4 ; 	a = sum1(a,b)return 0 ; &amp;#125;
+會有一種變數被更新成自己預期的感覺，但這樣的方式其實是將value複製到另外一
+                
+            </article>
+        </div>
+    </div>
+
+    
+        
+    <div class="post-wrap-left">
+        
+            <a class="post-link" href="/2023/11/08/Uva156-Ananagrams/"></a>
+        
+        
+        <div class="post-cover-left">
+            
+                
+                
+                    <img data-src="/images/banner.jpg" data-sizes="auto" alt="Uva156_Ananagrams" class="lazyload">
+                
+            
+
+        </div>
+        <div class="post-info">
+            <div class="post-meta">
+                <a><span class="icon-calendar"></span>2023-11-08</a>
+                
+                    <a><span class="icon-pencil"></span>302 字</a>
+                
+                
+                    <a><span class="icon-clock"></span>1 分鐘</a>
+                
+            </div>
+            <div class="post-title">Uva156_Ananagrams</div>
+            <article class="post-article">
+                
+                    不重複單字，重新排列成另外一個單字也不行
+例如: 有 eat 則 ate不行
+
+關鍵: 單字的標準化-&amp;gt; 全部小寫 ， a排到z
+
+
+map 映射
+類似python的dict 
+Key為標準化單字 value 為出現次數
+
+注意By reference 改變Vector記憶體指向的值
+Vector 儲存未標準化 
+“判斷”使用標準化12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include&amp;lt;iostream&amp;gt;#include&amp;lt;algor
+                
+            </article>
+        </div>
+    </div>
+
+    
+        
+    <div class="post-wrap-right">
+        
+            <a class="post-link" href="/2023/02/08/Django/"></a>
         
         <div class="post-cover-right">
             
@@ -161,7 +246,7 @@
         </div>
         <div class="post-info">
             <div class="post-meta">
-                <a><span class="icon-calendar"></span>2023-06-04</a>
+                <a><span class="icon-calendar"></span>2023-02-08</a>
                 
                     <a><span class="icon-pencil"></span>1.4k 字</a>
                 
@@ -174,45 +259,6 @@
                 
                     View視圖用戶相關之功能
 程式碼‘url(login&amp;#x2F;‘)-&amp;gt;login功能 →template(login.html)  1234567891011121314151617181920212223242526272829def login(request):        postform = PostForm(request.POST)        if request.method == &amp;#x27;POST&amp;#x27;:                        if postform.is_valid():  #forms驗證通過               
-                
-            </article>
-        </div>
-    </div>
-
-    
-        
-    <div class="post-wrap-left">
-        
-            <a class="post-link" href="/2023/06/04/hello-world/"></a>
-        
-        
-        <div class="post-cover-left">
-            
-                
-                
-                    <img data-src="/images/banner.jpg" data-sizes="auto" alt="Hello World" class="lazyload">
-                
-            
-
-        </div>
-        <div class="post-info">
-            <div class="post-meta">
-                <a><span class="icon-calendar"></span>2023-06-04</a>
-                
-                    <a><span class="icon-pencil"></span>75 字</a>
-                
-                
-                    <a><span class="icon-clock"></span>1 分鐘</a>
-                
-            </div>
-            <div class="post-title">Hello World</div>
-            <article class="post-article">
-                
-                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new &amp;quot;My New Post&amp;quot;
-
-More info: Writing
-Run server1$ hexo ser
                 
             </article>
         </div>
@@ -232,7 +278,7 @@ Run server1$ hexo ser
         <div class="sidebar-state">
             <div class="sidebar-state-article">
                 <div>文章</div>
-                <div class="sidebar-state-number">3</div>
+                <div class="sidebar-state-number">4</div>
             </div>
             <div class="sidebar-state-category">
                 <div>分類</div>
@@ -240,7 +286,7 @@ Run server1$ hexo ser
             </div>
             <div class="sidebar-state-tag">
                 <div>標簽</div>
-                <div class="sidebar-state-number">4</div>
+                <div class="sidebar-state-number">7</div>
             </div>
         </div>
         <div class="sidebar-social">
@@ -298,7 +344,7 @@ Run server1$ hexo ser
     <div class="widget-wrap">
         <h3 class="widget-title">標籤雲</h3>
         <div class="widget tagcloud">
-            <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%B6%B2%E9%A0%81/" style="font-size: 10px;">網頁</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%B4%B9/" style="font-size: 10px;">自我介紹</a>
+            <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/%E5%88%B7%E9%A1%8C/" style="font-size: 10px;">刷題</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/" style="font-size: 10px;">程式設計</a> <a href="/tags/%E7%B6%B2%E9%A0%81/" style="font-size: 10px;">網頁</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%B4%B9/" style="font-size: 10px;">自我介紹</a>
         </div>
     </div>
 
@@ -307,7 +353,7 @@ Run server1$ hexo ser
     <div class="widget-wrap">
         <h3 class="widget-title">彙整</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li></ul>
         </div>
     </div>
 
@@ -336,10 +382,10 @@ Run server1$ hexo ser
             
                 <div>
                     <span class="icon-brush"></span>
-                    1.8k
+                    2.2k
                     &nbsp;|&nbsp;
                     <span class="icon-coffee"></span>
-                    00:09
+                    00:10
                 </div>
             
             
@@ -366,7 +412,7 @@ Run server1$ hexo ser
         <div class="sidebar-state">
             <div class="sidebar-state-article">
                 <div>文章</div>
-                <div class="sidebar-state-number">3</div>
+                <div class="sidebar-state-number">4</div>
             </div>
             <div class="sidebar-state-category">
                 <div>分類</div>
@@ -374,7 +420,7 @@ Run server1$ hexo ser
             </div>
             <div class="sidebar-state-tag">
                 <div>標簽</div>
-                <div class="sidebar-state-number">4</div>
+                <div class="sidebar-state-number">7</div>
             </div>
         </div>
         <div class="sidebar-social">

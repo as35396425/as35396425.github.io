@@ -8,19 +8,22 @@
     
     
     <title>
-        Tag: 自我介紹 |
+        C++ call by reference |
         
         </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="你好">
-<meta property="og:type" content="website">
-<meta property="og:title">
-<meta property="og:url" content="http://example.com/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%B4%B9/index.html">
+    <meta name="description" content="在決定函數的Parameter時，我以前對python的概念就是需要用一個變數接收函數的return，如下 12345def sum1(a,b):	XXX &#x3D; a+b	return XXXa&#x3D; fun()用C&#x2F;C++的方式大略就是 123456789101112int sum1(int a , int b)&amp;#123;	 	return a+b ; &amp;#125;int main()&amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ call by reference">
+<meta property="og:url" content="http://example.com/2023/11/12/C-call-by-reference/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="你好">
+<meta property="og:description" content="在決定函數的Parameter時，我以前對python的概念就是需要用一個變數接收函數的return，如下 12345def sum1(a,b):	XXX &#x3D; a+b	return XXXa&#x3D; fun()用C&#x2F;C++的方式大略就是 123456789101112int sum1(int a , int b)&amp;#123;	 	return a+b ; &amp;#125;int main()&amp;#1">
 <meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-11-12T09:21:14.000Z">
+<meta property="article:modified_time" content="2023-11-12T09:21:42.017Z">
 <meta property="article:author" content="Yang-Yu Yao">
-<meta property="article:tag" content="HI">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="程式設計">
 <meta name="twitter:card" content="summary">
     
         <link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
@@ -52,7 +55,7 @@
         <div id="wrap">
             <header id="header">
     
-        <img data-src="/images/banner.jpg" data-sizes="auto" alt="" class="lazyload">
+        <img data-src="/images/banner.jpg" data-sizes="auto" alt="C++ call by reference" class="lazyload">
     
     <div id="header-outer" class="outer">
         <div id="header-title" class="inner">
@@ -60,16 +63,12 @@
                 
                     
                     
-                        <a href="/" id="logo">標簽</a>
+                        <a href="/" id="logo">C++ call by reference</a>
                     
                 
             </h1>
             
                 
-                
-                    <h2 id="subtitle-wrap">
-                        <a href="/" id="subtitle">自我介紹</a>
-                    </h2>
                 
             
         </div>
@@ -116,77 +115,74 @@
 </header>
   
             <div id="content" class="outer">
-                <section id="main">
-    <div class="archives-outer-wrap">
-        <div class="tag-wrap">
-            
-                <div class="archives-tag-list-item">
-                    <a class="archives-tag-list-link" href="/tags/自我介紹/">自我介紹</a>
-                </div>
-            
-                <div class="archives-tag-list-item">
-                    <a class="archives-tag-list-link" href="/tags/生活/">生活</a>
-                </div>
-            
-                <div class="archives-tag-list-item">
-                    <a class="archives-tag-list-link" href="/tags/C/">C++</a>
-                </div>
-            
-                <div class="archives-tag-list-item">
-                    <a class="archives-tag-list-link" href="/tags/刷題/">刷題</a>
-                </div>
-            
-                <div class="archives-tag-list-item">
-                    <a class="archives-tag-list-link" href="/tags/程式設計/">程式設計</a>
-                </div>
-            
-                <div class="archives-tag-list-item">
-                    <a class="archives-tag-list-link" href="/tags/python/">python</a>
-                </div>
-            
-                <div class="archives-tag-list-item">
-                    <a class="archives-tag-list-link" href="/tags/網頁/">網頁</a>
-                </div>
+                <section id="main"><article id="post-C-call-by-reference" class="h-entry article article-type-post"
+         itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div class="article-inner">
+        <div class="article-meta">
+            <div class="article-date">
+    <a href="/2023/11/12/C-call-by-reference/" class="article-date-link">
+        <time datetime="2023-11-12T09:21:14.000Z"
+              itemprop="datePublished">2023-11-12</time>
+    </a>
+</div>
+
             
         </div>
-        <div class="category-wrap">
+        <div class="hr-line"></div>
+        
+        <div class="e-content article-entry" itemprop="articleBody">
+            
+                <p>在決定函數的Parameter時，我以前對python的概念就是需要用一個變數接收函數的return，如下<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sum1</span>(<span class="params">a,b</span>):</span><br><span class="line">	XXX = a+b</span><br><span class="line">	<span class="keyword">return</span> XXX</span><br><span class="line"></span><br><span class="line">a= fun()</span><br></pre></td></tr></table></figure><br>用C&#x2F;C++的方式大略就是</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum1</span><span class="params">(<span class="type">int</span> a , <span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">	 </span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> a+b ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span> ; </span><br><span class="line">	<span class="type">int</span> b = <span class="number">4</span> ; </span><br><span class="line">	a = <span class="built_in">sum1</span>(a,b)</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>會有一種變數被更新成自己預期的感覺，但這樣的方式其實是將value複製到另外一個記憶體空間</p>
+<p>實際上在main函數中變數並沒有被修改掉，所以通常我們在C&#x2F;C++中會使用指標形式，可以理解為傳入的Value為變數的Address ，有些人會說call by Pointer 但我覺得不確切</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>* a , <span class="type">int</span>* b)</span>&#123;</span><br><span class="line">	<span class="type">int</span> t = * a ;  </span><br><span class="line">	*a = *b;</span><br><span class="line">	*b = t ; </span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span> ; </span><br><span class="line">	<span class="type">int</span> b = <span class="number">4</span> ; </span><br><span class="line">	swap(&amp;a,&amp;b)</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在函數中重新指定指標指向的值，或是說修改這個位址存放的值<br>    原本變數a的記憶體位址所存放的值被修改成b的值  以此類推…</p>
+<ul>
+<li>注意此時的”Argument” 需要使用Address (在C++中則有另一種方法)</li>
+</ul>
+<p>而在C++中又有另一種寫法，又被稱為傳參照(傳引用) ,Call by Reference</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">swap2</span><span class="params">(<span class="type">int</span>&amp; a , <span class="type">int</span>&amp; b)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> t =  a ;  </span><br><span class="line">	a = b;</span><br><span class="line">	b = t ; </span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span> ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span> ; </span><br><span class="line">	<span class="type">int</span> b = <span class="number">4</span> ; </span><br><span class="line">	<span class="built_in">swap2</span>(a,b)</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span> ; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>讓人容易混淆的點在於 函數的parameter 有”&amp;”的存在，需要注意他並不是取址運算子，當作一種方便的工具，用來表示Call by reference  ，讓我們在函數的範圍內不需要考慮記憶體位址，卻達到修改記憶體所的值 ，並且會偵測是否為合法的記憶體位址。</p>
+
             
         </div>
-        
-        
+        <footer class="article-footer">
+            <a data-url="http://example.com/2023/11/12/C-call-by-reference/" data-id="clov9rime000318t243q4g6x3" data-title="C++ call by reference"
+               class="article-share-link">Share</a>
             
             
-                
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/" rel="tag">程式設計</a></li></ul>
+
+        </footer>
+    </div>
     
-    <section class="archives-wrap">
-        <div class="archive-year-wrap">
-            <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-            <ul>
-                
-                <li class="archive-article">
-    <div class="archive-article-date-wrap">
-        <a href="/2023/06/04/Introduction/">
-            <time class="dt-published" datetime="2023-06-04T07:25:27.000Z"
-                  itemprop="datePublished">06-04</time>
-        </a>
-    </div>
-    <div class="archive-article-title-wrap">
         
-            
-                <a class="archive-article-title" href="/2023/06/04/Introduction/">個人介紹</a>
-            
+    <nav id="article-nav">
         
-    </div>
-</li>
+        
+            <div class="article-nav-link-wrap article-nav-link-right">
                 
+                    
+                    
+                        <img data-src="/images/banner.jpg" data-sizes="auto" alt="Uva156_Ananagrams"
+                             class="lazyload">
+                    
                 
-            </ul>
-        </div>
-    </section>
+                <a href="/2023/11/08/Uva156-Ananagrams/"></a>
+                <div class="article-nav-caption">Older</div>
+                <div class="article-nav-title">
+                    
+                        Uva156_Ananagrams
+                    
+                </div>
+            </div>
+        
+    </nav>
+
     
-    </div>
+</article>
 
 </section>
                 
