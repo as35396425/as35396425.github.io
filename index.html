@@ -133,7 +133,7 @@
             <div class="post-meta">
                 <a><span class="icon-calendar"></span>2023-06-04</a>
                 
-                    <a><span class="icon-pencil"></span>14 字</a>
+                    <a><span class="icon-pencil"></span>551 字</a>
                 
                 
                     <a><span class="icon-clock"></span>1 分鐘</a>
@@ -142,10 +142,8 @@
             <div class="post-title">個人介紹</div>
             <article class="post-article">
                 
-                    以下自介Github主頁
-
-音遊紀錄:OSU主頁
-
+                    以下自介我是楊于曜，就讀於亞洲大學資訊工程學系，曾經修過學校開的雲端計算實務後，開始對AWS雲端感興趣，也想藉著學校與勞動部這次機會，更深入了解目前業界是如何使用雲端服務進行軟體開發，以下是我在AWS與就業學程中學到的經歷。
+hexo+S3建構個人部落格部落格包含標籤雲以及彙整功能，便於記錄個人的學習軌跡，目前的頁面也是建構在個人的部落格當中。建構此部落格需要在AWS中開啟S3的靜態網站託管功能，以及配置bucket Policy 允許所有人獲取物件。Hexo deploy還需要配置aws CLI 的credentials，可以透過系統變數設定，或是使用awsSDK的configure配置權限
                 
             </article>
         </div>
@@ -155,15 +153,63 @@
         
     <div class="post-wrap-right">
         
-            <a class="post-link" href="/2023/11/12/gituhb%E5%88%86%E6%94%AF%E7%B7%B4%E7%BF%92/"></a>
+            <a class="post-link" href="/2023/11/14/%E5%A6%82%E4%BD%95%E5%B0%87hexo%E5%BB%BA%E7%BD%AE%E5%9C%A8s3/"></a>
         
         <div class="post-cover-right">
+            
+                
+                
+                    <img data-src="/images/banner.jpg" data-sizes="auto" alt="如何將hexo建置在s3" class="lazyload">
+                
+            
+        </div>
+        <div class="post-info">
+            <div class="post-meta">
+                <a><span class="icon-calendar"></span>2023-11-14</a>
+                
+                    <a><span class="icon-pencil"></span>186 字</a>
+                
+                
+                    <a><span class="icon-clock"></span>1 分鐘</a>
+                
+            </div>
+            <div class="post-title">如何將hexo建置在s3</div>
+            <article class="post-article">
+                
+                    需要用到
+安裝aws-cli 在自己的電腦
+安裝 hexo-deployer-aws-s3
+建立hexo框架
+
+配置
+使用指令aws configure
+利用LearnLab 配置SDK的config可以從 show detail查看
+配置後檔案放在 user&amp;#x2F;.aws 有config和credentials
+
+
+開啟bucket的ACL 才能將hexo deploy上12345deploy:  type: aws-s3  bucket: bucketName  region: Your Region
+配置hexo config.yaml的deply 
+配置bucket Policy
+                
+            </article>
+        </div>
+    </div>
+
+    
+        
+    <div class="post-wrap-left">
+        
+            <a class="post-link" href="/2023/11/12/gituhb%E5%88%86%E6%94%AF%E7%B7%B4%E7%BF%92/"></a>
+        
+        
+        <div class="post-cover-left">
             
                 
                 
                     <img data-src="/images/banner.jpg" data-sizes="auto" alt="gituhb分支練習" class="lazyload">
                 
             
+
         </div>
         <div class="post-info">
             <div class="post-meta">
@@ -188,19 +234,17 @@ commit 推到本地端1234567891011121314151617181920212223git init git clone XX
 
     
         
-    <div class="post-wrap-left">
+    <div class="post-wrap-right">
         
             <a class="post-link" href="/2023/11/12/C-call-by-reference/"></a>
         
-        
-        <div class="post-cover-left">
+        <div class="post-cover-right">
             
                 
                 
                     <img data-src="/images/banner.jpg" data-sizes="auto" alt="C++ call by reference" class="lazyload">
                 
             
-
         </div>
         <div class="post-info">
             <div class="post-meta">
@@ -225,17 +269,19 @@ commit 推到本地端1234567891011121314151617181920212223git init git clone XX
 
     
         
-    <div class="post-wrap-right">
+    <div class="post-wrap-left">
         
             <a class="post-link" href="/2023/11/08/Uva156-Ananagrams/"></a>
         
-        <div class="post-cover-right">
+        
+        <div class="post-cover-left">
             
                 
                 
                     <img data-src="/images/banner.jpg" data-sizes="auto" alt="Uva156_Ananagrams" class="lazyload">
                 
             
+
         </div>
         <div class="post-info">
             <div class="post-meta">
@@ -270,16 +316,14 @@ Vector 儲存未標準化
 
     
         
-    <div class="post-wrap-left">
+    <div class="post-wrap-right">
         
             <a class="post-link" href="/2023/02/08/Django/"></a>
         
-        
-        <div class="post-cover-left">
+        <div class="post-cover-right">
             
                 <img data-src="https://cdn.discordapp.com/attachments/887938907843469322/1114853220905390150/88019829_p0.png" data-sizes="auto" alt="Django購物網頁" class="lazyload">
             
-
         </div>
         <div class="post-info">
             <div class="post-meta">
@@ -315,7 +359,7 @@ Vector 儲存未標準化
         <div class="sidebar-state">
             <div class="sidebar-state-article">
                 <div>文章</div>
-                <div class="sidebar-state-number">5</div>
+                <div class="sidebar-state-number">6</div>
             </div>
             <div class="sidebar-state-category">
                 <div>分類</div>
@@ -323,7 +367,7 @@ Vector 儲存未標準化
             </div>
             <div class="sidebar-state-tag">
                 <div>標簽</div>
-                <div class="sidebar-state-number">7</div>
+                <div class="sidebar-state-number">9</div>
             </div>
         </div>
         <div class="sidebar-social">
@@ -381,7 +425,7 @@ Vector 儲存未標準化
     <div class="widget-wrap">
         <h3 class="widget-title">標籤雲</h3>
         <div class="widget tagcloud">
-            <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/%E5%88%B7%E9%A1%8C/" style="font-size: 10px;">刷題</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/" style="font-size: 10px;">程式設計</a> <a href="/tags/%E7%B6%B2%E9%A0%81/" style="font-size: 10px;">網頁</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%B4%B9/" style="font-size: 10px;">自我介紹</a>
+            <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/%E5%80%8B%E4%BA%BA%E7%B6%B2%E9%A0%81/" style="font-size: 10px;">個人網頁</a> <a href="/tags/%E5%88%B7%E9%A1%8C/" style="font-size: 10px;">刷題</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/" style="font-size: 10px;">程式設計</a> <a href="/tags/%E7%B6%B2%E9%A0%81/" style="font-size: 10px;">網頁</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%B4%B9/" style="font-size: 10px;">自我介紹</a>
         </div>
     </div>
 
@@ -406,7 +450,7 @@ Vector 儲存未標準化
             
             <div>
                 <span class="icon-copyright"></span>
-                2023-2023
+                2023-2024
                 <span class="footer-info-sep"></span>
                 Yang-Yu Yao
             </div>
@@ -419,10 +463,10 @@ Vector 儲存未標準化
             
                 <div>
                     <span class="icon-brush"></span>
-                    2.4k
+                    3.1k
                     &nbsp;|&nbsp;
                     <span class="icon-coffee"></span>
-                    00:11
+                    00:12
                 </div>
             
             
@@ -449,7 +493,7 @@ Vector 儲存未標準化
         <div class="sidebar-state">
             <div class="sidebar-state-article">
                 <div>文章</div>
-                <div class="sidebar-state-number">5</div>
+                <div class="sidebar-state-number">6</div>
             </div>
             <div class="sidebar-state-category">
                 <div>分類</div>
@@ -457,7 +501,7 @@ Vector 儲存未標準化
             </div>
             <div class="sidebar-state-tag">
                 <div>標簽</div>
-                <div class="sidebar-state-number">7</div>
+                <div class="sidebar-state-number">9</div>
             </div>
         </div>
         <div class="sidebar-social">
