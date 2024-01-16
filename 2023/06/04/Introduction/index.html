@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://cdn.discordapp.com/attachments/772481237511569420/1186683146494820432/image.png?ex=659423cd&is=6581aecd&hm=7747116b0524ffb55dfff8d33e2651954efcb167412e0a4c0147c4fdfc2d22b5&">
 <meta property="og:image" content="https://media.discordapp.net/attachments/772481237511569420/1186683191461957682/image.png?ex=659423d8&is=6581aed8&hm=37b1846844229a3952db0d7f85d4f6728142f264eb622d819c638f8153524793&=&format=webp&quality=lossless">
 <meta property="article:published_time" content="2023-06-04T07:25:27.000Z">
-<meta property="article:modified_time" content="2024-01-02T16:27:46.943Z">
+<meta property="article:modified_time" content="2024-01-16T01:00:36.824Z">
 <meta property="article:author" content="Yang-Yu Yao">
 <meta property="article:tag" content="自我介紹">
 <meta property="article:tag" content="生活">
@@ -142,6 +142,7 @@
 <h2 id="hexo-S3建構個人部落格"><a href="#hexo-S3建構個人部落格" class="headerlink" title="hexo+S3建構個人部落格"></a>hexo+S3建構個人部落格</h2><p>部落格包含標籤雲以及彙整功能，便於記錄個人的學習軌跡，目前的頁面也是建構在個人的部落格當中。<br><br>建構此部落格需要在AWS中開啟S3的靜態網站託管功能，以及配置bucket Policy 允許所有人獲取物件。<br><br>Hexo deploy還需要配置aws CLI 的credentials，可以透過系統變數設定，或是使用awsSDK的configure配置權限。</p>
 <h2 id="冷氣規格與型號價格查詢"><a href="#冷氣規格與型號價格查詢" class="headerlink" title="冷氣規格與型號價格查詢"></a>冷氣規格與型號價格查詢</h2><p>這是在就業學程當中老師帶我們做的專題，專題架構是採用無伺服器架構，使用S3架設了靜態網站，在網站中呼叫在API Gateway建立好的API，之後根據所呼叫的API觸發不同的Lambda，並配合dynamoDB進行，當中遇到比較困難的點是需要設定映射範本，讓使用者所查詢的資料能包成json檔，並傳到lambda查詢輸入內容，之後才發現可以使用”$input.json來接收使用者輸入</p>
 <p><a href = "https://auawspractice3539.s3.amazonaws.com/practice/S3/index2.html">冷氣查詢網站</a></p>
+<h2 id="車牌辨識-Rekognition-API-gateway-Lambda-LineNotify"><a href="#車牌辨識-Rekognition-API-gateway-Lambda-LineNotify" class="headerlink" title="車牌辨識 Rekognition +API gateway +Lambda +LineNotify"></a>車牌辨識 Rekognition +API gateway +Lambda +LineNotify</h2><p>利用上傳圖片檔到S3作為Trigger呼叫Lambda，在Lambda中寫好呼叫Rekognition程式，並利用API Gateway接收使用者上傳圖檔，再經由Lambda上傳到S3</p>
 <h2 id="Django-購物網站"><a href="#Django-購物網站" class="headerlink" title="Django 購物網站"></a>Django 購物網站</h2><p><a href = "http://yuyaos3page48763.s3-website-us-east-1.amazonaws.com/2023/02/08/Django/">實作細節</a></p>
 <h3 id="下單頁面"><a href="#下單頁面" class="headerlink" title="下單頁面"></a>下單頁面</h3><img src="https://media.discordapp.net/attachments/772481237511569420/1186692802512433232/image.png?ex=65942ccb&is=6581b7cb&hm=73f5f5f031ac4f3338751b01cf2de27d72c6794667f976f3cd08f14ee778a783&=&format=webp&quality=lossless&width=500&height=445">
 
@@ -329,10 +330,10 @@
             
                 <div>
                     <span class="icon-brush"></span>
-                    4.9k
+                    5k
                     &nbsp;|&nbsp;
                     <span class="icon-coffee"></span>
-                    00:20
+                    00:21
                 </div>
             
             
