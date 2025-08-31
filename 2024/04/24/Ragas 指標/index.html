@@ -1,0 +1,830 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-TW"  
+    
+      data-theme-mode="auto"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)","pt-BR":"Copiado com sucesso (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ","pt-BR":"Falha ao copiar (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本部落格所有文章除特別聲明外，均採用 BY-NC-SA 授權協議。轉載請註明出處！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://as35396425.github.io';</script>
+  
+  <title>
+    Ragas 指標 |
+    
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="Ragas 指標 生成器指標  Faithfulness 用生成的答案去找跟檢索結果的相關度 如果LLM不知道答案會是空值 解釋: 可以看到生成答案都是根據向量庫抓出來的檢索有相關，所以其實LLM的選擇問題不大   Answer Relevance  根據生成答案跟向量檢索去反推問題，並計算跟原本答案的cos相似度 解釋: 我們看這個指標，可以看出你的問題接不接近，或是生成的答案與問題有無相關性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ragas 指標">
+<meta property="og:url" content="https://as35396425.github.io/2024/04/24/Ragas%20%E6%8C%87%E6%A8%99/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="Ragas 指標 生成器指標  Faithfulness 用生成的答案去找跟檢索結果的相關度 如果LLM不知道答案會是空值 解釋: 可以看到生成答案都是根據向量庫抓出來的檢索有相關，所以其實LLM的選擇問題不大   Answer Relevance  根據生成答案跟向量檢索去反推問題，並計算跟原本答案的cos相似度 解釋: 我們看這個指標，可以看出你的問題接不接近，或是生成的答案與問題有無相關性">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2024-04-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-31T14:20:17.115Z">
+<meta property="article:author" content="Yang-Yu Yao">
+<meta property="article:tag" content="sideproject">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/smile_hina.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <img src="/images/yaku.png" alt="loading" />
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">厄神轉轉中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon ">
+             
+              
+                <img src="/images/yaku.png" alt="home icon" style="height: 1em;">
+              
+             
+          </div>
+          <a class="main-nav-link" href="/">首頁</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon ">
+             
+              
+                <img src="/images/yaku.png" alt="archives icon" style="height: 1em;">
+              
+             
+          </div>
+          <a class="main-nav-link" href="/archives">歸檔</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon ">
+             
+              
+                <img src="/images/yaku.png" alt="about icon" style="height: 1em;">
+              
+             
+          </div>
+          <a class="main-nav-link" href="/about">關於</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon ">
+             
+              
+                <img src="/images/yaku.png" alt="friend icon" style="height: 1em;">
+              
+             
+          </div>
+          <a class="main-nav-link" href="/friend">友鏈</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 訂閱" target="_blank"></a>
+    
+    
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img  fetchpriority="high" src="https://pbs.twimg.com/media/GI9BUGsaEAEVEAo?format=png&name=900x900" alt="Ragas 指標">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <span id="logo">
+            <h1 data-aos="slide-up">Ragas 指標</h1>
+          </span>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  <div class="sidebar-wrapper-container sticky">
+  
+    
+    
+  
+ 
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目錄</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+  
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ragas-%E6%8C%87%E6%A8%99"><span class="toc-number">1.</span> <span class="toc-text">Ragas 指標</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Define-application-scenarios"><span class="toc-number"></span> <span class="toc-text">Define application scenarios.</span></a>
+  
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Yang-Yu Yao" class="lazyload">
+  <div class="sidebar-author-name">Yang-Yu Yao</div>
+  <div class="sidebar-description">你好</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">10</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分類</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>標籤</div>
+    <div class="sidebar-state-number">12</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首頁"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="home icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">首頁</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="歸檔"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="archives icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">歸檔</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="關於"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="about icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">關於</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友鏈"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="friend icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">友鏈</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+  
+  <div class="sidebar-widget">
+  
+  </div>
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-Ragas 指標" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2024-04-23T16:00:00.000Z" itemprop="datePublished">2024-04-24</time>
+    <time style="display: none;" id="post-update-time">2025-08-31</time>
+  </span>
+  
+</div>
+
+      
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h3 id="Ragas-指標"><a href="#Ragas-指標" class="headerlink" title="Ragas 指標"></a>Ragas 指標</h3><ul>
+<li><p>生成器指標</p>
+<ul>
+<li>Faithfulness<ul>
+<li>用生成的答案去找跟檢索結果的相關度</li>
+<li>如果LLM不知道答案會是空值</li>
+<li>解釋: 可以看到生成答案都是根據向量庫抓出來的檢索有相關，所以其實LLM的選擇問題不大</li>
+</ul>
+</li>
+<li>Answer Relevance <ul>
+<li>根據生成答案跟向量檢索去反推問題，並計算跟原本答案的cos相似度</li>
+<li>解釋: 我們看這個指標，可以看出你的問題接不接近，或是生成的答案與問題有無相關性</li>
+<li>思考點<ul>
+<li>我看到我的LLM Faithfulness 偏低，所以幻覺情況較嚴重，但此時Answer Relevance的表現卻很好，要怎麼確定反推的問題沒有幻覺</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Answer Correctness<ul>
+<li>生成答案與基本事實相關度</li>
+<li>可以用來推斷語意是否與標註的一樣</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>檢索器指標</p>
+<ul>
+<li>context recall <ul>
+<li>找出檢索跟事實的相關程度，</li>
+<li>去計算檢索分布於基本事實的數量 &#x2F; 總數</li>
+<li>我們會先把基本事實切成數個解答，然後去找檢索相關性</li>
+<li>解釋 : 可以看出我們的檢索是否有找到事實</li>
+<li>思考點<ul>
+<li>我看answer回答挺正確的，但recall卻表現不好，會不會是基本事實切分表現差(評估方法差</li>
+<li>召回率本身表示泛化能力，(多少正確的被真的被辨識成正確</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>context precision<ul>
+<li>我的K個結果，有幾個是找到的，有被檢索出來的為(true positive + false positive)</li>
+<li>解釋: 我們可以設定K個要找到，可以去計算這K個找到的精準度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>e.g<br>    要先計算K precision<br>    我假設我找了K &#x3D; 2<br>    把每個K都算過，且K會包含較小的K</p>
+<pre><code>when K == 1  且 我找不到context 與 GT去算true positive (計算相關度 只會有0,1)
+0 / K  = 0/1 = 0 
+
+when K ==2 且 第二個可以找到contex 但包含之前所以:
+(1 + 0) / K = 1/2 = 0.5`
+
+計算完各個K precision 後，我們開始計算context precision 
+
+ (k1 + k2) / 找到多少個K = (0 + 0.5) / 1
+</code></pre>
+<ul>
+<li><p>甚麼叫做無參考指標</p>
+</li>
+<li><p>如果生成答案字數很多，那越容易出現幻覺</p>
+</li>
+<li><p>context_relevancy 指標對我們沒有參考性質<br>  因為我們抓到的context很多，但計算方式是<br>  -&gt; 跟答案相關的context &#x2F; 全部context</p>
+</li>
+</ul>
+<h2 id="Define-application-scenarios"><a href="#Define-application-scenarios" class="headerlink" title="Define application scenarios."></a>Define application scenarios.</h2><ol>
+<li>速度不要太慢</li>
+<li>不要生成大量答案</li>
+<li>因為是查詢文件，我們希望不要產生幻覺</li>
+<li>需要檢索的很精確<ul>
+<li>問題 : PDF 轉 文字 他會轉一些沒有參考性的文字，但向量相近</li>
+</ul>
+</li>
+</ol>
+<p>e.g </p>
+<blockquote>
+<p>‘15 \n \n（計畫名稱）○○○○○○○○計畫書 \n（內頁） \n壹、 計畫緣起 \n貳、 計畫目標 \n參、 辦理單位 \n肆、 執行期程 \n伍、 計畫項目及內容 \n陸、 經費需求 \n柒、 預期效益 \n捌、 其他事項’</p>
+</blockquote>
+<p>因為當我把K 切成 2 時，他的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/sideproject/" rel="tag">sideproject</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="https://pbs.twimg.com/media/GI9BUGsaEAEVEAo?format=png&name=900x900" data-sizes="auto" alt="RAG系統簡介與ragas評估指標" class="lazyload">
+        
+        <a href="/2024/04/24/RAG%E7%B3%BB%E7%B5%B1%E7%B0%A1%E4%BB%8B%E8%88%87ragas%E8%A9%95%E4%BC%B0%E6%8C%87%E6%A8%99/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            RAG系統簡介與ragas評估指標
+          
+        </h3>
+      </div>
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="https://pbs.twimg.com/media/GI9BUGsaEAEVEAo?format=png&name=900x900" data-sizes="auto" alt="Nand2tetris project 2 ALU" class="lazyload">
+      
+      <a href="/2024/01/08/Nand2tetris%20project%202%20ALU/"></a>
+      <div class="article-nav-caption">後一篇</div>
+      <h3 class="article-nav-title">
+        
+          Nand2tetris project 2 ALU
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2020-2025
+      
+      <span class="footer-info-sep rotate"></span>
+      Yang-Yu Yao
+    </div>
+    
+      <div>
+        基於&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        6.1k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        00:24
+      </div>
+    
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">總訪問量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">總訪客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目錄</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+  
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ragas-%E6%8C%87%E6%A8%99"><span class="toc-number">1.</span> <span class="toc-text">Ragas 指標</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Define-application-scenarios"><span class="toc-number"></span> <span class="toc-text">Define application scenarios.</span></a>
+  
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Yang-Yu Yao" class="lazyload">
+  <div class="sidebar-author-name">Yang-Yu Yao</div>
+  <div class="sidebar-description">你好</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">10</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分類</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>標籤</div>
+    <div class="sidebar-state-number">12</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首頁"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="home icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">首頁</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="歸檔"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="archives icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">歸檔</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="關於"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="about icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">關於</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友鏈"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="friend icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">友鏈</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Yang-Yu Yao",
+          title: "Ragas 指標",
+          url: "https://as35396425.github.io/2024/04/24/Ragas%20%E6%8C%87%E6%A8%99/",
+          excerpt: "",
+          description: "",
+          stripContent: "Ragas 指標 生成器指標  Faithfulness 用生成的答案去找跟檢索結果的相關度 如果LLM不知道答案會是空值 解釋: 可以看到生成答案都是根據向量庫抓出來的檢索有相關，所以其實LLM的選擇問題不大   Answer Relevance  根據生成答案跟向量檢索去反推問題，並計算跟原本答案的cos相似度 解釋: 我們看這個指標，可以看出你的問題接不接近，或是生成的答案與問題有無相關性 思考點 我看到我的LLM Faithfulness 偏低，所以幻覺情況較嚴重，但此時Answer R",
+          date: "Wed Apr 24 2024 00:00:00 GMT+0800",
+          updated: "Sun Aug 31 2025 22:20:17 GMT+0800",
+          cover: "https://pbs.twimg.com/media/GI9BUGsaEAEVEAo?format=png&name=900x900",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.9.1' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+  </html>
+

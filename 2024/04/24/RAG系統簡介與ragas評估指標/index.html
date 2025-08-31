@@ -1,0 +1,762 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-TW"  
+    
+      data-theme-mode="auto"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)","pt-BR":"Copiado com sucesso (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ","pt-BR":"Falha ao copiar (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本部落格所有文章除特別聲明外，均採用 BY-NC-SA 授權協議。轉載請註明出處！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://as35396425.github.io';</script>
+  
+  <title>
+    RAG系統簡介與ragas評估指標 |
+    
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="概念 fine-tuning 是針對LLM做微調，所以需要訓練的成本 RAG為利用資訊檢索去增強語言模型的回答，當中會利用提示詞模板   利用embedding將文字轉向量 把向量存到向量資料庫，以便之後檢索 檢索行為: “問題”-&gt;向量 -&gt;向量庫找相似度 -&gt; 回傳檢索到prompt 對LLM問問題時同時將”問題” 與 “檢索結果”加入到提示詞模板中 讓LLM可以根據參考資料">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RAG系統簡介與ragas評估指標">
+<meta property="og:url" content="https://as35396425.github.io/2024/04/24/RAG%E7%B3%BB%E7%B5%B1%E7%B0%A1%E4%BB%8B%E8%88%87ragas%E8%A9%95%E4%BC%B0%E6%8C%87%E6%A8%99/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="概念 fine-tuning 是針對LLM做微調，所以需要訓練的成本 RAG為利用資訊檢索去增強語言模型的回答，當中會利用提示詞模板   利用embedding將文字轉向量 把向量存到向量資料庫，以便之後檢索 檢索行為: “問題”-&gt;向量 -&gt;向量庫找相似度 -&gt; 回傳檢索到prompt 對LLM問問題時同時將”問題” 與 “檢索結果”加入到提示詞模板中 讓LLM可以根據參考資料">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2024-04-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-31T14:20:24.200Z">
+<meta property="article:author" content="Yang-Yu Yao">
+<meta property="article:tag" content="sideproject">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/smile_hina.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <img src="/images/yaku.png" alt="loading" />
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">厄神轉轉中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon ">
+             
+              
+                <img src="/images/yaku.png" alt="home icon" style="height: 1em;">
+              
+             
+          </div>
+          <a class="main-nav-link" href="/">首頁</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon ">
+             
+              
+                <img src="/images/yaku.png" alt="archives icon" style="height: 1em;">
+              
+             
+          </div>
+          <a class="main-nav-link" href="/archives">歸檔</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon ">
+             
+              
+                <img src="/images/yaku.png" alt="about icon" style="height: 1em;">
+              
+             
+          </div>
+          <a class="main-nav-link" href="/about">關於</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon ">
+             
+              
+                <img src="/images/yaku.png" alt="friend icon" style="height: 1em;">
+              
+             
+          </div>
+          <a class="main-nav-link" href="/friend">友鏈</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 訂閱" target="_blank"></a>
+    
+    
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img  fetchpriority="high" src="https://pbs.twimg.com/media/GI9BUGsaEAEVEAo?format=png&name=900x900" alt="RAG系統簡介與ragas評估指標">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <span id="logo">
+            <h1 data-aos="slide-up">RAG系統簡介與ragas評估指標</h1>
+          </span>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  <div class="sidebar-wrapper-container sticky">
+  
+    
+    
+  
+ 
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目錄</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+  
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Langchain-express"><span class="toc-number">2.</span> <span class="toc-text">Langchain express</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A3%E5%91%8Aprompt%E6%A8%A1%E6%9D%BF"><span class="toc-number">3.</span> <span class="toc-text">宣告prompt模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A2%E7%94%9FQA%E9%9B%86"><span class="toc-number">4.</span> <span class="toc-text">產生QA集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ragas-%E8%A9%95%E4%BC%B0"><span class="toc-number">5.</span> <span class="toc-text">ragas 評估</span></a></li></ol>
+  
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Yang-Yu Yao" class="lazyload">
+  <div class="sidebar-author-name">Yang-Yu Yao</div>
+  <div class="sidebar-description">你好</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">10</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分類</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>標籤</div>
+    <div class="sidebar-state-number">12</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首頁"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="home icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">首頁</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="歸檔"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="archives icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">歸檔</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="關於"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="about icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">關於</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友鏈"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="friend icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">友鏈</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+  
+  <div class="sidebar-widget">
+  
+  </div>
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-RAG系統簡介與ragas評估指標" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2024-04-23T16:00:00.000Z" itemprop="datePublished">2024-04-24</time>
+    <time style="display: none;" id="post-update-time">2025-08-31</time>
+  </span>
+  
+</div>
+
+      
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>fine-tuning 是針對LLM做微調，所以需要訓練的成本</li>
+<li>RAG為利用資訊檢索去增強語言模型的回答，當中會利用提示詞模板</li>
+</ul>
+<ol>
+<li>利用embedding將文字轉向量</li>
+<li>把向量存到向量資料庫，以便之後檢索</li>
+<li>檢索行為: “問題”-&gt;向量 -&gt;向量庫找相似度 -&gt; 回傳檢索到prompt</li>
+<li>對LLM問問題時同時將”問題” 與 “檢索結果”加入到提示詞模板中</li>
+<li>讓LLM可以根據參考資料做回答<br>![[Pasted image 20240424144532.png]]</li>
+</ol>
+<h2 id="Langchain-express"><a href="#Langchain-express" class="headerlink" title="Langchain express"></a>Langchain express</h2><p>可以利用langchain表達式去搭建rag_chain</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rag_chain = (</span><br><span class="line">        &#123;</span><br><span class="line">           <span class="string">&quot;context&quot;</span>: qa_with_opensearch_azure,  <span class="string">&quot;question&quot;</span>: RunnablePassthrough(),</span><br><span class="line">        &#125;</span><br><span class="line">        | prompt</span><br><span class="line">        | llm</span><br><span class="line">        | StrOutputParser()</span><br><span class="line">    )</span><br><span class="line">    <span class="comment">#context可以傳入 lambda函式或函式物件</span></span><br></pre></td></tr></table></figure>
+<p>ref :<br><a target="_blank" rel="noopener" href="https://python.langchain.com/docs/use_cases/question_answering/quickstart/">https://python.langchain.com/docs/use_cases/question_answering/quickstart/</a></p>
+<h2 id="宣告prompt模板"><a href="#宣告prompt模板" class="headerlink" title="宣告prompt模板"></a>宣告prompt模板</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">template = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    f&quot;參考資料如下:&#123;context&#125;\n&quot;</span></span><br><span class="line"><span class="string">    f&quot;你是一名樂於助人的助手，請根據參考資料歸納整理後回答問題:&#123;question&#125;\n&quot;</span></span><br><span class="line"><span class="string">    \n\n 如果不知道就說不知道</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    prompt = PromptTemplate(</span><br><span class="line">        template=template,</span><br><span class="line">        input_variables=[<span class="string">&quot;context&quot;</span>,<span class="string">&quot;question&quot;</span>]</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> prompt</span><br></pre></td></tr></table></figure>
+<h2 id="產生QA集"><a href="#產生QA集" class="headerlink" title="產生QA集"></a>產生QA集</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">GenerateDataset</span>(<span class="params">questions:<span class="built_in">list</span> ,ground_truths:<span class="built_in">list</span></span>):</span><br><span class="line">    answers = []</span><br><span class="line">    contexts = []</span><br><span class="line">    <span class="keyword">for</span> query <span class="keyword">in</span> questions:</span><br><span class="line">        contexts.append(qa_with_opensearch_azure((query,Doc_Index)))</span><br><span class="line">        answers.append(rag_chain.invoke(query))</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&quot;question&quot;</span>: questions,</span><br><span class="line">        <span class="string">&quot;answer&quot;</span>: answers,</span><br><span class="line">        <span class="string">&quot;contexts&quot;</span>: contexts,</span><br><span class="line">        <span class="string">&quot;ground_truth&quot;</span>: ground_truths</span><br><span class="line">    &#125;</span><br><span class="line">    dataset = Dataset.from_dict(data)</span><br><span class="line">    <span class="keyword">return</span> dataset</span><br></pre></td></tr></table></figure>
+<ul>
+<li>contexts為對向量庫做相似度搜尋，並回傳結果之list</li>
+<li>ground_truth 為正確答案，可聯想為監督式學習的標籤</li>
+<li>rag_chain通過ivoke調用，將questions傳入RunnablePassthrough ，return answer</li>
+</ul>
+<h2 id="ragas-評估"><a href="#ragas-評估" class="headerlink" title="ragas 評估"></a>ragas 評估</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">score = evaluate(dataset, </span><br><span class="line">				 metrics=metrics  , </span><br><span class="line">				 llm = llm , </span><br><span class="line">				 embeddings = azure_embedding_function   )</span><br><span class="line">				 </span><br></pre></td></tr></table></figure>
+<p>使用evaluate評估QA集<br>將會產生評估報告，這邊定義評估指標為</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">metrics = [</span><br><span class="line">    faithfulness,</span><br><span class="line">    answer_relevancy,</span><br><span class="line">    answer_correctness,</span><br><span class="line">    context_recall,</span><br><span class="line">    context_precision,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>ragas指標可參考 [[Ragas 指標]]<br>模型使用方法，以azure為例可參考<a target="_blank" rel="noopener" href="https://python.langchain.com/docs/integrations/llms/azure_openai/">https://python.langchain.com/docs/integrations/llms/azure_openai/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/sideproject/" rel="tag">sideproject</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="https://pbs.twimg.com/media/GI9BUGsaEAEVEAo?format=png&name=900x900" data-sizes="auto" alt="Ragas 指標" class="lazyload">
+      
+      <a href="/2024/04/24/Ragas%20%E6%8C%87%E6%A8%99/"></a>
+      <div class="article-nav-caption">後一篇</div>
+      <h3 class="article-nav-title">
+        
+          Ragas 指標
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2020-2025
+      
+      <span class="footer-info-sep rotate"></span>
+      Yang-Yu Yao
+    </div>
+    
+      <div>
+        基於&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        6.1k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        00:24
+      </div>
+    
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">總訪問量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">總訪客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目錄</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+  
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Langchain-express"><span class="toc-number">2.</span> <span class="toc-text">Langchain express</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A3%E5%91%8Aprompt%E6%A8%A1%E6%9D%BF"><span class="toc-number">3.</span> <span class="toc-text">宣告prompt模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A2%E7%94%9FQA%E9%9B%86"><span class="toc-number">4.</span> <span class="toc-text">產生QA集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ragas-%E8%A9%95%E4%BC%B0"><span class="toc-number">5.</span> <span class="toc-text">ragas 評估</span></a></li></ol>
+  
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Yang-Yu Yao" class="lazyload">
+  <div class="sidebar-author-name">Yang-Yu Yao</div>
+  <div class="sidebar-description">你好</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">10</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分類</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>標籤</div>
+    <div class="sidebar-state-number">12</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首頁"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="home icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">首頁</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="歸檔"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="archives icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">歸檔</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="關於"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="about icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">關於</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友鏈"></a>
+        <div class="sidebar-menu-icon icon ">
+          
+            
+              <img src="/images/yaku.png" alt="friend icon" style="width: 1em;">
+            
+          
+        </div>
+        <div class="sidebar-menu-link">友鏈</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Yang-Yu Yao",
+          title: "RAG系統簡介與ragas評估指標",
+          url: "https://as35396425.github.io/2024/04/24/RAG%E7%B3%BB%E7%B5%B1%E7%B0%A1%E4%BB%8B%E8%88%87ragas%E8%A9%95%E4%BC%B0%E6%8C%87%E6%A8%99/",
+          excerpt: "",
+          description: "",
+          stripContent: "概念 fine-tuning 是針對LLM做微調，所以需要訓練的成本 RAG為利用資訊檢索去增強語言模型的回答，當中會利用提示詞模板   利用embedding將文字轉向量 把向量存到向量資料庫，以便之後檢索 檢索行為: “問題”-&amp;gt;向量 -&amp;gt;向量庫找相似度 -&amp;gt; 回傳檢索到prompt 對LLM問問題時同時將”問題” 與 “檢索結果”加入到提示詞模板中 讓LLM可以根據參考資料做回答![[Pasted image 20240424144532.png]]  Langchain",
+          date: "Wed Apr 24 2024 00:00:00 GMT+0800",
+          updated: "Sun Aug 31 2025 22:20:24 GMT+0800",
+          cover: "https://pbs.twimg.com/media/GI9BUGsaEAEVEAo?format=png&name=900x900",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.9.1' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+  </html>
+
